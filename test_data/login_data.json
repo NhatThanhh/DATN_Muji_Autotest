@@ -1,0 +1,96 @@
+{
+    "login_test_data": {
+        "test_cases": [
+            {
+            "testId": "DN_01",
+            "category": "Valid Login",
+            "email": "thanhblink@gmail.com",
+            "password": "Th@nh2004",
+            "expectedResult": "success",
+            "expectedMessage": "",
+            "description": "Đăng nhập với tài khoản hợp lệ"
+            },
+            {
+            "testId": "DN_02",
+            "category": "Unregistered Email",
+            "email": "mujitestmail@gmail.com",
+            "password": "Th@nh2004",
+            "expectedResult": "login_failed",
+            "expectedMessage": "Thông tin đăng nhập không chính xác.",
+            "description": "Đăng nhập thất bại với email chưa đăng ký"
+            },
+            {
+            "testId": "DN_03",
+            "category": "Invalid Email Format",
+            "email": "thanhblinkgmail.com",
+            "password": "Th@nh2004",
+            "expectedResult": "email_invalid",
+            "expectedMessage": "Vui lòng nhập email hợp lệ",
+            "description": "Đăng nhập thất bại với email sai định dạng"
+            },
+            {
+            "testId": "DN_04",
+            "category": "Required Fields - Email Empty",
+            "email": "",
+            "password": "Th@nh2004",
+            "expectedResult": "email_required",
+            "expectedMessage": "Thông tin bắt buộc",
+            "description": "Đăng nhập thất bại với email để trống"
+            },
+            {
+            "testId": "DN_05",
+            "category": "Required Fields - Password Empty",
+            "email": "thanhblink@gmail.com",
+            "password": "",
+            "expectedResult": "password_required",
+            "expectedMessage": "Mật khẩu phải có ít nhất 6 ký tự",
+            "description": "Đăng nhập thất bại với mật khẩu để trống"
+            },
+            {
+            "testId": "DN_06",
+            "category": "Wrong Password",
+            "email": "thanhblink@gmail.com",
+            "password": "thanh2004",
+            "expectedResult": "login_failed",
+            "expectedMessage": "Thông tin đăng nhập không chính xác.",
+            "description": "Đăng nhập thất bại với mật khẩu sai"
+            },
+            {
+            "testId": "DN_07",
+            "category": "Wrong Password - Case Sensitive",
+            "email": "thanhblink@gmail.com",
+            "password": "th@nh2004",
+            "expectedResult": "login_failed",
+            "expectedMessage": "Thông tin đăng nhập không chính xác.",
+            "description": "Đăng nhập thất bại với mật khẩu sai do phân biệt chữ thường và chữ in hoa"
+            },
+            {
+            "testId": "DN_08",
+            "category": "Wrong Password - Leading Space",
+            "email": "thanhblink@gmail.com",
+            "password": " Th@nh2004",
+            "expectedResult": "login_failed",
+            "expectedMessage": "Thông tin đăng nhập không chính xác.",
+            "description": "Đăng nhập thất bại với mật khẩu có khoảng trắng ở đầu"
+            },
+            {
+            "testId": "DN_09",
+            "category": "Required Fields - Email And Password Empty",
+            "email": "",
+            "password": "",
+            "expectedResult": "login_failed",
+            "expectedMessage": "Thông tin bắt buộc",
+            "description": "Đăng nhập thất bại với email và mật khẩu để trống"
+            },
+            {
+            "testId": "DN_10",
+            "category": "Invalid Email - Leading Space",
+            "email": " thanhblink@gmail.com",
+            "password": "thanh2k4",
+            "expectedResult": "email_invalid",
+            "expectedMessage": "Vui lòng nhập email hợp lệ",
+            "description": "Đăng nhập thất bại với email chứa khoảng trắng ở đầu"
+            }
+        ]
+    }
+}

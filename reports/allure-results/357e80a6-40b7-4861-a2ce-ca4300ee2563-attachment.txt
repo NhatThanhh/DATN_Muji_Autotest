@@ -1,0 +1,14 @@
+[32mINFO    [0m pages.login_page:login_page.py:54 [LoginPage] Mở trang chủ MUJI
+[32mINFO    [0m pages.login_page:login_page.py:45 [LoginPage] Sau khi mở trang chủ | URL: https://www.muji.com.vn/vn | Title: MUJI Vietnam
+[32mINFO    [0m pages.login_page:login_page.py:95 [LoginPage] Login bằng test data: DN_03
+[32mINFO    [0m pages.login_page:login_page.py:85 [LoginPage] Bắt đầu flow đăng nhập
+[32mINFO    [0m pages.login_page:login_page.py:59 [LoginPage] Click link Đăng nhập
+[32mINFO    [0m pages.login_page:login_page.py:61 [LoginPage] Chờ form đăng nhập hiển thị
+[32mINFO    [0m pages.login_page:login_page.py:45 [LoginPage] Sau khi mở form đăng nhập | URL: https://www.muji.com.vn/vn/login | Title: MUJI Vietnam
+[32mINFO    [0m pages.login_page:login_page.py:68 [LoginPage] Nhập email: thanhblinkgmail.com
+[32mINFO    [0m pages.login_page:login_page.py:73 [LoginPage] Nhập mật khẩu: ******
+[32mINFO    [0m pages.login_page:login_page.py:78 [LoginPage] Click button Đăng nhập
+[32mINFO    [0m pages.login_page:login_page.py:45 [LoginPage] Sau khi click button Đăng nhập | URL: https://www.muji.com.vn/vn/login | Title: MUJI Vietnam
+[32mINFO    [0m pages.login_page:login_page.py:92 [LoginPage] Đã thực hiện xong thao tác đăng nhập
+[32mINFO    [0m pages.login_page:login_page.py:117 [LoginPage] Verify đăng nhập thất bại với message: Vui lòng nhập email hợp lệ
+[32mINFO    [0m pages.login_page:login_page.py:119 [LoginPage] Verify đăng nhập thất bại: PASSED

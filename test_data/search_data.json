@@ -1,0 +1,118 @@
+{
+  "search_test_data": {
+    "test_cases": [
+      {
+        "testId": "TK_01",
+        "category": "Valid Search",
+        "keyword": "áo thun",
+        "expectedResult": "success",
+        "expectedSearchValue": "áo thun",
+        "expectedMessage": "",
+        "expectedUrlContains": "search",
+        "relatedKeyword": "áo thun",
+        "description": "Kiểm tra kết quả tìm kiếm liên quan đến từ khoá tìm kiếm"
+      },
+      {
+        "testId": "TK_02",
+        "category": "Search With Non-existing Keyword",
+        "keyword": "qwerty",
+        "expectedResult": "no_result",
+        "expectedSearchValue": "qwerty",
+        "expectedMessage": "Không tìm thấy kết quả nào",
+        "expectedUrlContains": "search",
+        "relatedKeyword": "",
+        "description": "Kiểm tra tìm kiếm với từ khoá không tồn tại"
+      },
+      {
+        "testId": "TK_03",
+        "category": "Search With Special Characters",
+        "keyword": "@/@*",
+        "expectedResult": "no_result",
+        "expectedSearchValue": "@/@*",
+        "expectedMessage": "Không tìm thấy kết quả nào",
+        "expectedUrlContains": "search",
+        "relatedKeyword": "",
+        "description": "Kiểm tra tìm kiếm với kí tự đặc biệt"
+      },
+      {
+        "testId": "TK_04",
+        "category": "Search With Numbers Only",
+        "keyword": "123456",
+        "expectedResult": "no_result",
+        "expectedSearchValue": "123456",
+        "expectedMessage": "Không tìm thấy kết quả nào",
+        "expectedUrlContains": "search",
+        "relatedKeyword": "",
+        "description": "Kiểm tra tìm kiếm với từ khoá chỉ chứa chữ số"
+      },
+      {
+        "testId": "TK_05",
+        "category": "Search With Leading Space",
+        "keyword": " áo thun",
+        "expectedResult": "success",
+        "expectedSearchValue": " áo thun",
+        "expectedMessage": "",
+        "expectedUrlContains": "search",
+        "relatedKeyword": "áo thun",
+        "description": "Kiểm tra tìm kiếm với từ khoá chứa khoảng trắng ở đầu"
+      },
+      {
+        "testId": "TK_06",
+        "category": "Search With Spaces In Keyword",
+        "keyword": " á o thu n",
+        "expectedResult": "success",
+        "expectedSearchValue": " á o thu n",
+        "expectedMessage": "",
+        "expectedUrlContains": "search",
+        "relatedKeyword": "áo thun",
+        "description": "Kiểm tra tìm kiếm với từ khoá chứa khoảng trắng ở giữa"
+      },
+      {
+        "testId": "TK_07",
+        "category": "Search With Vietnamese Keyword Without Accent",
+        "keyword": "ao so mi",
+        "expectedResult": "success",
+        "expectedSearchValue": "ao so mi",
+        "expectedMessage": "",
+        "expectedUrlContains": "search",
+        "relatedKeyword": "áo sơ mi",
+        "description": "Kiểm tra tìm kiếm với từ khoá tiếng Việt không dấu"
+      },
+      {
+        "testId": "TK_08",
+        "category": "Search With Empty Keyword",
+        "keyword": "",
+        "expectedResult": "stay_home",
+        "expectedSearchValue": "",
+        "expectedMessage": "",
+        "expectedUrl": "https://www.muji.com.vn/vn",
+        "relatedKeyword": "",
+        "description": "Kiểm tra tìm kiếm với từ khoá để trống"
+      },
+      {
+        "testId": "TK_09",
+        "category": "Search With Letters And Numbers",
+        "keyword": "áo thun 2025",
+        "expectedResult": "success",
+        "expectedSearchValue": "áo thun 2025",
+        "expectedMessage": "",
+        "expectedUrlContains": "search",
+        "relatedKeyword": "áo thun",
+        "description": "Kiểm tra tìm kiếm với từ khoá chứa cả chữ lẫn số"
+      },
+      {
+        "testId": "TK_10",
+        "category": "Search With More Than 100 Characters",
+        "keyword": "",
+        "generateKeyword": true,
+        "keywordLength": 120,
+        "expectedResult": "no_result",
+        "expectedSearchValue": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "expectedMessage": "Không tìm thấy kết quả nào",
+        "expectedUrlContains": "search",
+        "relatedKeyword": "",
+        "description": "Kiểm tra tìm kiếm với từ khoá lớn hơn 100 kí tự"
+      }
+    ]
+  }
+}
