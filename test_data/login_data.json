@@ -4,7 +4,7 @@
             {
             "testId": "DN_01",
             "category": "Valid Login",
-            "email": "thanhblink@gmail.com",
+            "email": "testmoneymanagement@gmail.com",
             "password": "Th@nh2004",
             "expectedResult": "success",
             "expectedMessage": "",
@@ -40,7 +40,7 @@
             {
             "testId": "DN_05",
             "category": "Required Fields - Password Empty",
-            "email": "thanhblink@gmail.com",
+            "email": "testmoneymanagement@gmail.com",
             "password": "",
             "expectedResult": "password_required",
             "expectedMessage": "Mật khẩu phải có ít nhất 6 ký tự",
@@ -49,7 +49,7 @@
             {
             "testId": "DN_06",
             "category": "Wrong Password",
-            "email": "thanhblink@gmail.com",
+            "email": "testmoneymanagement@gmail.com",
             "password": "thanh2004",
             "expectedResult": "login_failed",
             "expectedMessage": "Thông tin đăng nhập không chính xác.",
@@ -58,7 +58,7 @@
             {
             "testId": "DN_07",
             "category": "Wrong Password - Case Sensitive",
-            "email": "thanhblink@gmail.com",
+            "email": "testmoneymanagement@gmail.com",
             "password": "th@nh2004",
             "expectedResult": "login_failed",
             "expectedMessage": "Thông tin đăng nhập không chính xác.",
@@ -67,7 +67,7 @@
             {
             "testId": "DN_08",
             "category": "Wrong Password - Leading Space",
-            "email": "thanhblink@gmail.com",
+            "email": "testmoneymanagement@gmail.com",
             "password": " Th@nh2004",
             "expectedResult": "login_failed",
             "expectedMessage": "Thông tin đăng nhập không chính xác.",
@@ -85,7 +85,7 @@
             {
             "testId": "DN_10",
             "category": "Invalid Email - Leading Space",
-            "email": " thanhblink@gmail.com",
+            "email": " testmoneymanagement@gmail.com",
             "password": "thanh2k4",
             "expectedResult": "email_invalid",
             "expectedMessage": "Vui lòng nhập email hợp lệ",

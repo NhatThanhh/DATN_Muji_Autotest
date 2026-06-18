@@ -93,21 +93,14 @@ def base_url():
 # browser fixture lấy từ pytest-playwright
 # =========================
 
-@pytest.fixture()
-def page(browser, base_url):
-    context = browser.new_context(
-        viewport={
-            "width": 1366,
-            "height": 768
-        }
-    )
-
+@pytest.fixture
+def page(context, base_url):
     page = context.new_page()
-    page.goto(base_url, wait_until="domcontentloaded")
-
+    page.set_default_timeout(30000)
+    page.set_default_navigation_timeout(90000)
+    page.goto(base_url, wait_until="domcontentloaded", timeout=90000)
     yield page
-
-    context.close()
+    page.close()
 
 
 # =========================
