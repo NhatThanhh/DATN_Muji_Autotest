@@ -1,0 +1,2 @@
+
+[Trace] Saved trace: reports\allure-results\traces\tests_test_register_test_register_with_invalid_data_chromium-DK_09_2026-06-18_16-36-42.zip

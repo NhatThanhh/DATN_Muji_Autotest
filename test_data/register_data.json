@@ -108,7 +108,7 @@
             {
                 "testId": "DK_09",
                 "category": "Invalid Password - Missing Uppercase",
-                "email": "invalidpassmail@gmail.com",
+                "email": "invalidpassmail01@gmail.com",
                 "password": "th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
