@@ -47,8 +47,7 @@ def test_dk_02_register_with_existing_email(page, base_url):
         )
 
 
-# invalid_test_ids = ["DK_03", "DK_04", "DK_05", "DK_06", "DK_07", "DK_08", "DK_09","DK_10", "DK_11", "DK_12", "DK_13"]
-invalid_test_ids = ["DK_09"]
+invalid_test_ids = ["DK_03", "DK_04", "DK_05", "DK_06", "DK_07", "DK_08", "DK_09","DK_10", "DK_11", "DK_12", "DK_13"]
 invalid_register_cases = [
     case
     for case in register_data["test_cases"]
