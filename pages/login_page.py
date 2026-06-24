@@ -1,4 +1,3 @@
-import logging
 import re
 from playwright.sync_api import expect
 from pages.base_page import BasePage
@@ -6,9 +5,6 @@ from pages.base_page import BasePage
 
 class LoginPage(BasePage):
 
-    # =========================
-    # Locators
-    # =========================
     def login_link(self):
         return self.page.locator('div.header-login a[title="Đăng nhập"]')
 
@@ -36,14 +32,11 @@ class LoginPage(BasePage):
 
     def open(self):
         self.open_path("/")
-        self.log_current_page_state("Sau khi mở trang chủ")
 
     def open_login_form(self):
         self.click(self.login_link())
         expect(self.email_input()).to_be_visible(timeout=10000)
         expect(self.password_input()).to_be_visible(timeout=10000)
-
-        self.log_current_page_state("Sau khi mở form đăng nhập")
 
     def fill_email(self, email: str):
         self.fill(self.email_input(), email)
@@ -53,7 +46,6 @@ class LoginPage(BasePage):
 
     def submit(self):
         self.click(self.login_button())
-        self.log_current_page_state("Sau khi click button Đăng nhập")
 
     def login(self, email: str, password: str):
         self.open_login_form()
@@ -62,10 +54,7 @@ class LoginPage(BasePage):
         self.submit()
 
     def login_by_data(self, test_data: dict):
-        self.login(
-            email=test_data["email"],
-            password=test_data["password"]
-        )
+        self.login(email=test_data["email"], password=test_data["password"])
 
     def expect_login_success(self):
         expect(self.page).to_have_url(re.compile(r"https://www\.muji\.com\.vn/vn/?$"), timeout=10000)

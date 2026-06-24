@@ -69,21 +69,11 @@ def base_url():
 @pytest.fixture
 def page(context, base_url, request):
     page = None
-    context.tracing.start(
-        screenshots=True,
-        snapshots=True,
-        sources=True
-    )
-
+    context.tracing.start( screenshots=True, snapshots=True, sources=True )
     page = context.new_page()
     page.set_default_timeout(30000)
     page.set_default_navigation_timeout(90000)
-
-    page.goto(
-        base_url,
-        wait_until="domcontentloaded",
-        timeout=90000
-    )
+    page.goto( base_url, wait_until="domcontentloaded", timeout=90000)
 
     yield page
     report = getattr(request.node, "rep_call", None)
@@ -95,20 +85,12 @@ def page(context, base_url, request):
     if test_failed:
         os.makedirs(TRACES_DIR, exist_ok=True)
 
-        trace_path = os.path.join(
-            TRACES_DIR,
-            f"{test_name}_{timestamp}.zip"
-        )
+        trace_path = os.path.join( TRACES_DIR, f"{test_name}_{timestamp}.zip")
         try:
             context.tracing.stop(path=trace_path)
             print(f"\n[Trace] Saved trace: {trace_path}")
             if HAS_ALLURE:
-                allure.attach.file(
-                    trace_path,
-                    name=f"Playwright trace - {test_name}",
-                    attachment_type="application/zip",
-                    extension="zip"
-                )
+                allure.attach.file(trace_path, name=f"Playwright trace - {test_name}", attachment_type="application/zip", extension="zip")
 
         except Exception as error:
             print(f"\n[Trace] Failed to save trace: {error}")
@@ -138,16 +120,9 @@ def pytest_runtest_makereport(item, call):
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         test_name = safe_file_name(item.nodeid)
 
-        screenshot_path = os.path.join(
-            SCREENSHOTS_DIR,
-            f"{test_name}_{timestamp}.png"
-        )
+        screenshot_path = os.path.join(SCREENSHOTS_DIR, f"{test_name}_{timestamp}.png")
 
-        page.screenshot(
-            path=screenshot_path,
-            full_page=True
-        )
-
+        page.screenshot(path=screenshot_path, full_page=True)
         print(f"\n[Screenshot] Saved screenshot: {screenshot_path}")
 
         if HAS_ALLURE:
