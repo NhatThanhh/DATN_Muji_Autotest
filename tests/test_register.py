@@ -51,15 +51,13 @@ invalid_test_ids = ["DK_03", "DK_04", "DK_05", "DK_06", "DK_07", "DK_08", "DK_09
 invalid_register_cases = [
     case
     for case in register_data["test_cases"]
-    if case["testId"] in invalid_test_ids
-]
+    if case["testId"] in invalid_test_ids]
 
 invalid_register_case_map = {case["testId"]: case for case in invalid_register_cases}
 
 @allure.epic("Xác thực người dùng")
 @allure.story("Đăng ký")
-@pytest.mark.parametrize("test_id",invalid_test_ids
-)
+@pytest.mark.parametrize("test_id",invalid_test_ids)
 def test_register_with_invalid_data(page, base_url, test_id):
     test_data = invalid_register_case_map[test_id]
     register_page = RegisterPage(page, base_url)
@@ -69,6 +67,4 @@ def test_register_with_invalid_data(page, base_url, test_id):
     with allure.step(f"Nhập dữ liệu cho test case {test_data['testId']}"):
         register_page.register_by_data(test_data)
     with allure.step("Kiểm tra đăng ký thất bại và hiển thị thông báo lỗi"):
-        assert_message_contains(
-            register_page,
-            test_data["expectedMessage"])
+        assert_message_contains(register_page, test_data["expectedMessage"])

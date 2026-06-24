@@ -4,14 +4,14 @@
             {
                 "testId": "DK_01",
                 "category": "Valid Register",
-                "email": "validregisteremail01@gmail.com",
+                "email": "validregisteremail04@gmail.com",
                 "password": "Th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
                 "dateOfBirth": "20/08/2004",
                 "gender": "Nam",
                 "expectedResult": "success",
-                "expectedMessage": "validregister@gmail.com\nChúng tôi đã gửi email xác nhận kèm theo liên kết.\nVui lòng kiểm tra email của bạn để kích hoạt tài khoản.",
+                "expectedMessage": "validregisteremail04@gmail.com\nChúng tôi đã gửi email xác nhận kèm theo liên kết.\nVui lòng kiểm tra email của bạn để kích hoạt tài khoản.",
                 "description": "Đăng ký với thông tin hợp lệ"
             },
             {
@@ -56,7 +56,7 @@
             {
                 "testId": "DK_05",
                 "category": "Invalid Email - Missing @",
-                "email": "invalidemailmissingmail.com",
+                "email": "invalidemailmissingmail01.com",
                 "password": "Th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
@@ -69,7 +69,7 @@
             {
                 "testId": "DK_06",
                 "category": "Invalid Email - Leading Space",
-                "email": " invalidemailleadingspace@gmail.com",
+                "email": " invalidemailleadingspace01@gmail.com",
                 "password": "Th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
@@ -82,7 +82,7 @@
             {
                 "testId": "DK_07",
                 "category": "Required Fields - Password Empty",
-                "email": "invalidregistermail@gmail.com",
+                "email": "invalidregisterpassempty@gmail.com",
                 "password": "",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
@@ -95,7 +95,7 @@
             {
                 "testId": "DK_08",
                 "category": "Invalid Password - Less Than 6 Characters",
-                "email": "invalidemailshortpassword@gmail.com",
+                "email": "invalidemailshortpassword01@gmail.com",
                 "password": "Th@nh",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
@@ -108,7 +108,7 @@
             {
                 "testId": "DK_09",
                 "category": "Invalid Password - Missing Uppercase",
-                "email": "invalidpassmail03@gmail.com",
+                "email": "missuppercasepass@gmail.com",
                 "password": "th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
@@ -121,7 +121,7 @@
             {
                 "testId": "DK_10",
                 "category": "Invalid Password - Leading Space",
-                "email": "invalidregistermail03@gmail.com",
+                "email": "passleadingspace@gmail.com",
                 "password": " th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
@@ -134,7 +134,7 @@
             {
                 "testId": "DK_11",
                 "category": "Invalid Full Name - One Word",
-                "email": "invalidregistermail04@gmail.com",
+                "email": "invalidregisteronewordname@gmail.com",
                 "password": "Th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Thanh",
@@ -147,7 +147,7 @@
             {
                 "testId": "DK_12",
                 "category": "Invalid Full Name - Numbers Only",
-                "email": "ivalidfullnumbername@gmail.com",
+                "email": "ivalidfullnumbername01@gmail.com",
                 "password": "Th@nh2004",
                 "phone": "0856235879",
                 "fullName": "123 456",
@@ -160,7 +160,7 @@
             {
                 "testId": "DK_13",
                 "category": "Invalid Full Name - Special Characters",
-                "email": "invalidregistermail@gmail.com",
+                "email": "specialfullname01@gmail.com",
                 "password": "Th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh@*",
