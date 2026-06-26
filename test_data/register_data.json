@@ -4,7 +4,7 @@
             {
                 "testId": "DK_01",
                 "category": "Valid Register",
-                "email": "validregisteremail06@gmail.com",
+                "email": "validregisteremail07@gmail.com",
                 "password": "Th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
@@ -108,7 +108,7 @@
             {
                 "testId": "DK_09",
                 "category": "Invalid Password - Missing Uppercase",
-                "email": "missuppercasepass01@gmail.com",
+                "email": "missuppercasepass02@gmail.com",
                 "password": "th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
@@ -147,7 +147,7 @@
             {
                 "testId": "DK_12",
                 "category": "Invalid Full Name - Numbers Only",
-                "email": "ivalidfullnumbername02@gmail.com",
+                "email": "ivalidfullnumbername03@gmail.com",
                 "password": "Th@nh2004",
                 "phone": "0856235879",
                 "fullName": "123 456",

@@ -40,9 +40,7 @@ class RegisterPage(BasePage):
     def page_body(self):
         return self.page.locator("body")
 
-    # =========================
-    # Actions
-    # =========================
+
 
     def open(self):
         self.open_path("/register")
