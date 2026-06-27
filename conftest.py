@@ -21,6 +21,7 @@ TRACES_DIR = os.path.join(ALLURE_RESULTS_DIR, "traces")
 ALLURE_REPORT_HISTORY_DIR = os.path.join(ALLURE_REPORT_DIR, "history")
 ALLURE_RESULTS_HISTORY_DIR = os.path.join(ALLURE_RESULTS_DIR, "history")
 
+
 def safe_file_name(nodeid: str) -> str:
     return (
         nodeid
@@ -41,11 +42,9 @@ def get_package_version(package_name: str):
     except metadata.PackageNotFoundError:
         return "not installed"
 
+
 def write_environment_properties():
-    environment_path = os.path.join(
-        ALLURE_RESULTS_DIR,
-        "environment.properties"
-    )
+    environment_path = os.path.join(ALLURE_RESULTS_DIR, "environment.properties")
 
     environment_data = {
         "Python": sys.version.split()[0],
@@ -67,14 +66,49 @@ def write_environment_properties():
         for key, value in environment_data.items():
             file.write(f"{key}={value}\n")
 
+
+# Lưu Playwright trace khi test fail
+def save_trace_on_failure(item):
+    context = item.funcargs.get("context", None)
+    if context is None:
+        print("\n[Trace] No context found, cannot save trace.")
+        return
+    if getattr(item, "_trace_saved", False):
+        return
+    os.makedirs(TRACES_DIR, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    test_name = safe_file_name(item.nodeid)
+    trace_path = os.path.join(TRACES_DIR,f"{test_name}_{timestamp}.zip")
+
+    try:
+        context.tracing.stop(path=trace_path)
+        item._trace_saved = True
+
+        print(f"\n[Trace] Saved trace: {trace_path}")
+
+        if HAS_ALLURE:
+            allure.attach.file(
+                trace_path,
+                name=f"Playwright trace - {test_name}",
+                attachment_type="application/zip",
+                extension="zip"
+            )
+
+    except Exception as error:
+        print(f"\n[Trace] Failed to save trace: {error}")
+
+
 def pytest_configure(config):
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     config._test_run_timestamp = timestamp
 
+
 def pytest_sessionstart(session):
     temp_history_dir = os.path.join(REPORTS_DIR, "temp-history")
+
     if os.path.exists(temp_history_dir):
         shutil.rmtree(temp_history_dir)
+
     if os.path.exists(ALLURE_REPORT_HISTORY_DIR):
         shutil.copytree(
             ALLURE_REPORT_HISTORY_DIR,
@@ -84,11 +118,13 @@ def pytest_sessionstart(session):
         print("\n[Allure History] Backed up previous history.")
     else:
         print("\n[Allure History] No previous allure-report/history found.")
+
     if os.path.exists(ALLURE_RESULTS_DIR):
         shutil.rmtree(ALLURE_RESULTS_DIR)
 
     os.makedirs(ALLURE_RESULTS_DIR, exist_ok=True)
     os.makedirs(REPORTS_DIR, exist_ok=True)
+
     if os.path.exists(temp_history_dir):
         shutil.copytree(
             temp_history_dir,
@@ -96,42 +132,36 @@ def pytest_sessionstart(session):
             dirs_exist_ok=True
         )
         print("\n[Allure History] Restored history to allure-results/history.")
+
     write_environment_properties()
+
 
 @pytest.fixture(scope="session")
 def base_url():
     return "https://www.muji.com.vn/vn"
 
+
 @pytest.fixture
 def page(context, base_url, request):
+    request.node._trace_saved = False
     page = None
-    context.tracing.start( screenshots=True, snapshots=True, sources=True )
+    context.tracing.start(
+        screenshots=True,
+        snapshots=True,
+        sources=True
+    )
+
     page = context.new_page()
     page.set_default_timeout(30000)
     page.set_default_navigation_timeout(90000)
-    page.goto( base_url, wait_until="domcontentloaded", timeout=90000)
 
+    page.goto(
+        base_url,
+        wait_until="domcontentloaded",
+        timeout=90000
+    )
     yield page
-    report = getattr(request.node, "rep_call", None)
-    test_failed = report.failed if report else False
-
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    test_name = safe_file_name(request.node.nodeid)
-
-    if test_failed:
-        os.makedirs(TRACES_DIR, exist_ok=True)
-
-        trace_path = os.path.join( TRACES_DIR, f"{test_name}_{timestamp}.zip")
-        try:
-            context.tracing.stop(path=trace_path)
-            print(f"\n[Trace] Saved trace: {trace_path}")
-            if HAS_ALLURE:
-                allure.attach.file(trace_path, name=f"Playwright trace - {test_name}", attachment_type="application/zip", extension="zip")
-
-        except Exception as error:
-            print(f"\n[Trace] Failed to save trace: {error}")
-
-    else:
+    if not getattr(request.node, "_trace_saved", False):
         try:
             context.tracing.stop()
         except Exception as error:
@@ -144,29 +174,38 @@ def page(context, base_url, request):
 def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
+
     setattr(item, f"rep_{report.when}", report)
+
     if report.when == "call" and report.failed:
         page = item.funcargs.get("page", None)
 
-        if page is None:
-            return
+        if page is not None:
+            os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
 
-        os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            test_name = safe_file_name(item.nodeid)
 
-        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        test_name = safe_file_name(item.nodeid)
-
-        screenshot_path = os.path.join(SCREENSHOTS_DIR, f"{test_name}_{timestamp}.png")
-
-        page.screenshot(path=screenshot_path, full_page=True)
-        print(f"\n[Screenshot] Saved screenshot: {screenshot_path}")
-
-        if HAS_ALLURE:
-            allure.attach.file(
-                screenshot_path,
-                name=f"Screenshot on failure - {test_name}",
-                attachment_type=allure.attachment_type.PNG
+            screenshot_path = os.path.join(
+                SCREENSHOTS_DIR,
+                f"{test_name}_{timestamp}.png"
             )
+
+            page.screenshot(
+                path=screenshot_path,
+                full_page=True
+            )
+
+            print(f"\n[Screenshot] Saved screenshot: {screenshot_path}")
+
+            if HAS_ALLURE:
+                allure.attach.file(
+                    screenshot_path,
+                    name=f"Screenshot on failure - {test_name}",
+                    attachment_type=allure.attachment_type.PNG
+                )
+        save_trace_on_failure(item)
+
 
 def pytest_sessionfinish(session, exitstatus):
     if not os.path.exists(ALLURE_RESULTS_DIR):
@@ -177,12 +216,9 @@ def pytest_sessionfinish(session, exitstatus):
         file for file in os.listdir(ALLURE_RESULTS_DIR)
         if file.endswith("-result.json")
     ]
-
     if not json_files:
         print("\n[Allure] No Allure result files found.")
         return
-
     print(f"\n[Allure] Current results are saved in: {ALLURE_RESULTS_DIR}")
-
     if os.path.exists(TRACES_DIR):
         print(f"[Trace] Failure traces are saved in: {TRACES_DIR}")
