@@ -41,10 +41,7 @@ def test_dk_02_register_with_existing_email(page, base_url):
     with allure.step("Nhập thông tin đăng ký với email đã tồn tại"):
         register_page.register_by_data(test_data)
     with allure.step("Kiểm tra đăng ký thất bại và hiển thị thông báo email đã tồn tại"):
-        assert_message_contains(
-            register_page,
-            test_data["expectedMessage"]
-        )
+        assert_message_contains(register_page, test_data["expectedMessage"])
 
 
 invalid_test_ids = ["DK_03", "DK_04", "DK_05", "DK_06", "DK_07", "DK_08", "DK_09","DK_10", "DK_11", "DK_12", "DK_13"]
