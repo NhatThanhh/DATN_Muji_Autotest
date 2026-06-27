@@ -1,2 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","7059","DK_09 - Đăng ký thất bại với mật khẩu thiếu ký tự in hoa","tests","2026-06-18","failed","2026-06-18","","test_register","",""

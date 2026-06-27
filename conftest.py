@@ -1,7 +1,9 @@
 import os
 import shutil
 from datetime import datetime
-
+import sys
+import platform
+import importlib.metadata as metadata
 import pytest
 
 try:
@@ -32,6 +34,39 @@ def safe_file_name(nodeid: str) -> str:
         .replace(":", "_")
     )
 
+
+def get_package_version(package_name: str):
+    try:
+        return metadata.version(package_name)
+    except metadata.PackageNotFoundError:
+        return "not installed"
+
+def write_environment_properties():
+    environment_path = os.path.join(
+        ALLURE_RESULTS_DIR,
+        "environment.properties"
+    )
+
+    environment_data = {
+        "Python": sys.version.split()[0],
+        "Platform": f"{platform.system()}-{platform.release()}-{platform.version()}",
+        "Packages": (
+            f"pytest: {get_package_version('pytest')}; "
+            f"playwright: {get_package_version('playwright')}; "
+            f"allure-pytest: {get_package_version('allure-pytest')}"
+        ),
+        "Plugins": (
+            f"pytest-playwright: {get_package_version('pytest-playwright')}; "
+            f"pytest-xdist: {get_package_version('pytest-xdist')}; "
+            f"python-dotenv: {get_package_version('python-dotenv')}"
+        ),
+        "JAVA_HOME": os.getenv("JAVA_HOME", "Not set"),
+    }
+
+    with open(environment_path, "w", encoding="utf-8") as file:
+        for key, value in environment_data.items():
+            file.write(f"{key}={value}\n")
+
 def pytest_configure(config):
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     config._test_run_timestamp = timestamp
@@ -61,6 +96,7 @@ def pytest_sessionstart(session):
             dirs_exist_ok=True
         )
         print("\n[Allure History] Restored history to allure-results/history.")
+    write_environment_properties()
 
 @pytest.fixture(scope="session")
 def base_url():
