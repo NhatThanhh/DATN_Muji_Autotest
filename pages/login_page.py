@@ -20,15 +20,8 @@ class LoginPage(BasePage):
     def login_button(self):
         return self.page.get_by_role("button", name="Đăng nhập")
 
-    def logout_text(self):
-        return self.page.get_by_text("Đăng xuất", exact=False).first
-
     def message_by_text(self, message: str):
         return self.page.get_by_text(message, exact=False).first
-
-    def page_body(self):
-        return self.page.locator("body")
-
 
     def open(self):
         self.open_path("/")
@@ -55,19 +48,3 @@ class LoginPage(BasePage):
 
     def login_by_data(self, test_data: dict):
         self.login(email=test_data["email"], password=test_data["password"])
-
-    def expect_login_success(self):
-        expect(self.page).to_have_url(re.compile(r"https://www\.muji\.com\.vn/vn/?$"), timeout=10000)
-        expect(self.login_link()).to_be_hidden(timeout=10000)
-        expect(self.register_link()).to_be_hidden(timeout=10000)
-
-    def expect_login_failure(self, expected_message: str):
-        expect(self.message_by_text(expected_message)).to_be_visible(timeout=5000)
-
-    def login_expect_success(self, email: str, password: str):
-        self.login(email, password)
-        self.expect_login_success()
-
-    def login_expect_failure(self, email: str, password: str, expected_message: str):
-        self.login(email, password)
-        self.expect_login_failure(expected_message)

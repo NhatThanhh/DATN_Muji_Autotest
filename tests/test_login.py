@@ -1,5 +1,7 @@
+import re
 import allure
 import pytest
+from playwright.sync_api import expect
 from pages.login_page import LoginPage
 from utils.data_reader import read_json
 
@@ -20,7 +22,9 @@ def test_login_with_valid_account(page, base_url):
     with allure.step("Nhập email và mật khẩu hợp lệ"):
         login_page.login_by_data(test_data)
     with allure.step("Kiểm tra đăng nhập thành công"):
-        login_page.expect_login_success()
+        expect(page).to_have_url(re.compile(r"https://www\.muji\.com\.vn/vn/?$"), timeout=10000)
+        expect(login_page.login_link()).to_be_hidden(timeout=10000)
+        expect(login_page.register_link()).to_be_hidden(timeout=10000)
 
 # DN_02 - Đăng nhập với email chưa đăng ký
 @allure.epic("Xác thực người dùng")
@@ -35,7 +39,7 @@ def test_login_with_unregistered_email(page, base_url):
     with allure.step("Nhập email chưa đăng ký và mật khẩu"):
         login_page.login_by_data(test_data)
     with allure.step("Kiểm tra đăng nhập thất bại và hiển thị thông báo lỗi"):
-        login_page.expect_login_failure(test_data["expectedMessage"])
+        expect(login_page.message_by_text(test_data["expectedMessage"])).to_be_visible(timeout=5000)
 
 # DN_03 -> DN_10: Đăng nhập thất bại
 invalid_login_test_ids = ["DN_03", "DN_04", "DN_05", "DN_06", "DN_07", "DN_08", "DN_09", "DN_10"]
@@ -47,7 +51,7 @@ invalid_login_case_map = {
 @allure.epic("Xác thực người dùng")
 @allure.story("Đăng nhập")
 @allure.severity(allure.severity_level.NORMAL)
-@pytest.mark.parametrize( "test_id", invalid_login_test_ids, ids=invalid_login_test_ids)
+@pytest.mark.parametrize("test_id", invalid_login_test_ids, ids=invalid_login_test_ids)
 def test_login_with_invalid_data(page, base_url, test_id):
     test_data = invalid_login_case_map[test_id]
     login_page = LoginPage(page, base_url)
@@ -56,5 +60,6 @@ def test_login_with_invalid_data(page, base_url, test_id):
         login_page.open()
     with allure.step(f"Nhập dữ liệu cho test case {test_data['testId']}"):
         login_page.login_by_data(test_data)
+
     with allure.step("Kiểm tra đăng nhập thất bại và hiển thị thông báo lỗi"):
-        login_page.expect_login_failure(test_data["expectedMessage"])
+        expect(login_page.message_by_text(test_data["expectedMessage"])).to_be_visible(timeout=5000)
