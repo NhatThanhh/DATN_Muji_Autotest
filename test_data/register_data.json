@@ -4,14 +4,14 @@
             {
                 "testId": "DK_01",
                 "category": "Valid Register",
-                "email": "validregisteremail13@gmail.com",
+                "email": "validregisteremail14@gmail.com",
                 "password": "Th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
                 "dateOfBirth": "20/08/2004",
                 "gender": "Nam",
                 "expectedResult": "success",
-                "expectedMessage": "validregisteremail13@gmail.com\nChúng tôi đã gửi email xác nhận kèm theo liên kết.\nVui lòng kiểm tra email của bạn để kích hoạt tài khoản.",
+                "expectedMessage": "validregisteremail14@gmail.com\nChúng tôi đã gửi email xác nhận kèm theo liên kết.\nVui lòng kiểm tra email của bạn để kích hoạt tài khoản.",
                 "description": "Đăng ký với thông tin hợp lệ"
             },
             {
@@ -108,7 +108,7 @@
             {
                 "testId": "DK_09",
                 "category": "Invalid Password - Missing Uppercase",
-                "email": "missuppercasepass13@gmail.com",
+                "email": "missuppercasepass14@gmail.com",
                 "password": "th@nh2004",
                 "phone": "0376704109",
                 "fullName": "Nguyễn Nhật Thanh",
@@ -147,7 +147,7 @@
             {
                 "testId": "DK_12",
                 "category": "Invalid Full Name - Numbers Only",
-                "email": "invalidfullnumbername13@gmail.com",
+                "email": "invalidfullnumbername14@gmail.com",
                 "password": "Th@nh2004",
                 "phone": "0856235879",
                 "fullName": "123 456",
