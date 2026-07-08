@@ -4,6 +4,10 @@
 Built an automated testing framework for the MUJI Vietnam website and integrated it into a CI/CD pipeline.  
 The project also applied AI-assisted tools, including GitHub Copilot and Playwright MCP, to support test script generation and evaluate the level of AI support in automated software testing.
 
+## Test Cases
+
+The test cases file is stored in `test_cases/Muji_Test_Case.xlsx`.
+
 ## Technologies Used
 
 - Python
@@ -12,7 +16,6 @@ The project also applied AI-assisted tools, including GitHub Copilot and Playwri
 - Page Object Model (POM)
 - Allure Report
 - GitHub Actions
-- GitHub Pages
 - GitHub Copilot
 - Playwright MCP
 
@@ -37,16 +40,6 @@ This helps improve code readability, maintainability and reusability.
 ### Data-Driven Testing
 
 Test data is stored in JSON files in test_data folder to support multiple test scenarios, including valid, invalid and negative cases.
-
-### Allure Report
-
-Allure Report is used to generate detailed test reports, including:
-
-- Test case status
-- Test steps
-- Screenshots on failure
-- Playwright trace attachments
-- Test environment information
 
 ### CI/CD Integration
 
@@ -102,12 +95,6 @@ Run all tests:
 pytest
 ```
 
-Run a specific test file:
-
-```bash
-pytest tests/test_login.py
-```
-
 Run tests and generate Allure results:
 
 ```bash
@@ -119,7 +106,7 @@ pytest --alluredir=reports/allure-results
 This project aims to:
 
 - Build a maintainable automated web testing framework.
-- Apply Playwright and Pytest for functional UI testing.
+- Apply Playwright and Pytest for functional testing.
 - Use the Page Object Model to improve test code structure and maintainability.
 - Use Allure Report for clear test result visualization.
 - Integrate automated testing into a CI/CD pipeline.
