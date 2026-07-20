@@ -8,17 +8,6 @@ The project also applied AI-assisted tools, including GitHub Copilot and Playwri
 
 The test cases file is stored in `test_cases/Muji_Test_Case.xlsx`.
 
-## Technologies Used
-
-- Python
-- Playwright
-- Pytest
-- Page Object Model (POM)
-- Allure Report
-- GitHub Actions
-- GitHub Copilot
-- Playwright MCP
-
 ## Tested Website
 
 - Website: MUJI Vietnam
